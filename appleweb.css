@@ -1,0 +1,352 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: #EAEAEA;
+}
+
+.container {
+    width: 1110px;
+    margin: 0 auto;
+}
+
+/* HEADER */
+.header {
+    background: white;
+    padding: 20px 0;
+}
+
+.header__wrap {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__icons {
+    display: flex;
+    gap: 15px;
+}
+
+.icon {
+    position: relative;
+}
+
+.badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: #FFA542;
+    color: white;
+    font-size: 10px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* SELECT */
+.select-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0 40px;
+}
+
+.select-wrapper select {
+    width: 320px;
+    padding: 14px;
+    border-radius: 14px;
+    border: none;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+/* CARD */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 25px;
+}
+
+.card__img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+}
+
+.card__top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.new-price {
+    font-size: 18px;
+    font-weight: 700;
+    color: #FFA542;
+}
+
+.old-price {
+    font-size: 12px;
+    color: #B0B0B0;
+    text-decoration: line-through;
+}
+
+/* FOOTER */
+.footer {
+    background: white;
+    margin-top: 60px;
+    padding: 30px 0;
+}
+
+.footer__wrap {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer__links a {
+    text-decoration: none;
+    color: black;
+    margin-left: 20px;
+}
+
+.card__actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* ОБЩИЙ СТИЛЬ КНОПОК */
+.buy-btn,
+.fav-btn {
+    border: none;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    transition: 0.2s;
+}
+
+/* КНОПКА КУПИТЬ */
+.buy-btn {
+    background: #FFA542;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.buy-btn:hover {
+    background: #ff8f1f;
+    transform: scale(1.05);
+}
+
+/* ИЗБРАННОЕ (❤) */
+.fav-btn {
+    background: #f5f5f5;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    font-size: 16px;
+    opacity: 0.6;
+}
+
+/* активное избранное */
+.fav-btn.active {
+    background: #ffe3e3;
+    color: red;
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* hover эффект */
+.fav-btn:hover {
+    transform: scale(1.1);
+}
+
+/* ===== TOAST УВЕДОМЛЕНИЕ ===== */
+#toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(20, 20, 20, 0.95);
+    color: white;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 14px;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.4s;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* появление */
+#toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* типы сообщений */
+#toast.success {
+    background: #2ecc71;
+}
+
+#toast.error {
+    background: #e74c3c;
+}
+
+.fav-btn {
+    transition: 0.2s;
+}
+
+.fav-btn.active {
+    color: red;
+    transform: scale(1.2);
+}
+
+/* 📱 Адаптация под телефоны */
+@media (max-width: 768px) {
+
+    .container {
+        width: 100%;
+        padding: 0 15px;
+    }
+
+    .header__wrap {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .products {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .product {
+        width: 100%;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+/* Общий фон */
+.checkout {
+    max-width: 500px;
+    margin: 50px auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Заголовок */
+.checkout h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Поля */
+.checkout input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.checkout input:focus {
+    border-color: #0071e3;
+    outline: none;
+}
+
+/* Кнопка */
+.checkout button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: #0071e3;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.checkout button:hover {
+    background: #005bb5;
+}
+
+/* Блок заказа */
+.order-summary {
+    background: #f5f5f7;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.order-summary p {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+
+/* Итог */
+.total {
+    font-weight: bold;
+    font-size: 18px;
+}
+/* Адаптив для мобильных устройств (ширина экрана до 480px) */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px; /* Добавляем отступы по бокам, чтобы контент не лип к краям */
+    }
+
+    .grid, .fav-grid {
+        grid-template-columns: 1fr !important; /* Строго одна карточка в ряд */
+        gap: 20px;
+    }
+
+    .header_wrap {
+        padding: 10px 0;
+        flex-direction: row; /* Оставляем в ряд, но можно уменьшить лого */
+    }
+
+    .card {
+        padding: 15px;
+        margin: 0 auto;
+        max-width: 100%; /* Чтобы карточка не вылезала за экран */
+    }
+
+    /* Увеличиваем кнопки для удобства нажатия пальцем */
+    .buy-btn, .final-buy-btn {
+        padding: 15px;
+        font-size: 16px;
+    }
+}

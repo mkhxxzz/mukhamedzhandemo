@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Оформление заказа</title>
+    <link rel="stylesheet" href="appleweb.css">
+    <style>
+        .checkout-main {
+            max-width: 500px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            font-family: sans-serif;
+        }
+        .order-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .item-preview { display: flex; align-items: center; gap: 15px; }
+        .item-preview img { width: 50px; height: 50px; object-fit: contain; }
+
+        /* Красная кнопка-квадрат 40x40 */
+        .del-square {
+            width: 40px !important;
+            height: 40px !important;
+            background: #ff4a52 !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 10px !important;
+            cursor: pointer;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Твои красивые инпуты */
+        .order-inputs input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            box-sizing: border-box;
+            background: #f9f9f9;
+        }
+        .final-buy-btn {
+            width: 100%;
+            padding: 18px;
+            background: #0071e3;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="checkout-main">
+    <h2 style="text-align:center">Оформление заказа</h2>
+    <div id="cartContent"></div>
+
+    <div style="font-size: 20px; font-weight: bold; margin: 25px 0;">
+        Итого: <span id="totalSum">0</span> ₸
+    </div>
+
+    <div class="order-inputs">
+        <input type="text" placeholder="Ваше имя">
+        <input type="tel" placeholder="Телефон">
+        <input type="text" placeholder="Адрес доставки">
+        <button class="final-buy-btn" onclick="alert('Заказ оформлен!')">Оформить заказ</button>
+    </div>
+    <a href="index.html" style="display:block; text-align:center; margin-top:20px; color:#aaa; text-decoration:none;">Вернуться назад</a>
+</div>
+
+<script>
+    function renderOrder() {
+        const container = document.getElementById('cartContent');
+        const totalDisplay = document.getElementById('totalSum');
+        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+        let sum = 0;
+        container.innerHTML = "";
+
+        cart.forEach((item, index) => {
+            sum += Number(item.price);
+            container.innerHTML += `
+                    <div class="order-row">
+                        <div class="item-preview">
+                            <img src="${item.img}">
+                            <div>
+                                <b>${item.name}</b><br>
+                                <small>${item.price} ₸</small>
+                            </div>
+                        </div>
+                        <button class="del-square" onclick="deleteItem(${index})">🗑</button>
+                    </div>`;
+        });
+        totalDisplay.innerText = sum.toLocaleString();
+    }
+
+    function deleteItem(idx) {
+        let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        cart.splice(idx, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        renderOrder();
+    }
+
+    window.onload = renderOrder;
+</script>
+</body>
+</html>

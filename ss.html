@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Избранное - QPICK</title>
+    <link rel="stylesheet" href="appleweb.css">
+    <style>
+        .fav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+        .card {
+            background: #fff;
+            border-radius: 25px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            text-align: center;
+            position: relative;
+        }
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+        }
+
+        /* ТА САМАЯ КНОПКА КВАДРАТ 40x40 */
+        .del-fav {
+            width: 40px !important;
+            height: 40px !important;
+            background: #ff4a52 !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 10px !important;
+            cursor: pointer;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header style="padding: 20px 0;">
+        <a href="index.html" style="text-decoration:none; color:#000;">← На главную</a>
+        <h2>Избранное</h2>
+    </header>
+
+    <div id="favList" class="fav-grid"></div>
+</div>
+
+<script>
+    function render() {
+        const container = document.getElementById('favList');
+        const favs = JSON.parse(localStorage.getItem('favorites') || '[]');
+
+        if (favs.length === 0) {
+            container.innerHTML = "<h3>У вас пока нет избранных товаров</h3>";
+            return;
+        }
+
+        container.innerHTML = "";
+        favs.forEach((item, index) => {
+            container.innerHTML += `
+                    <div class="card">
+                        <button class="del-fav" onclick="removeFav(${index})">🗑</button>
+                        <img src="${item.img}">
+                        <h3>${item.name}</h3>
+                        <p style="color: #ffa542; font-weight: bold;">${item.price}</p>
+                    </div>`;
+        });
+    }
+
+    function removeFav(idx) {
+        let favs = JSON.parse(localStorage.getItem('favorites') || '[]');
+        favs.splice(idx, 1);
+        localStorage.setItem('favorites', JSON.stringify(favs));
+        render();
+    }
+
+    window.onload = render;
+</script>
+</body>
+</html>
